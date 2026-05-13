@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Для неё</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+    color:white;
+    position:relative;
+}
+
+/* звёзды */
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+    0%,100%{opacity:.2}
+    50%{opacity:1}
+}
+
+/* комплименты */
+.kompliments{
+    position:absolute;
+    z-index:10;
+    text-align:center;
+}
+
+.komplet{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,200px) scale(.3);
+    opacity:0;
+    font-size:40px;
+    white-space:nowrap;
+    animation:fly 3s forwards;
+}
+
+.komplet:nth-child(2){ animation-delay:2.5s; }
+.komplet:nth-child(3){ animation-delay:5s; }
+
+@keyframes fly{
+    0%{
+        opacity:0;
+        transform:translate(-50%,250px) scale(.2);
+    }
+    30%{
+        opacity:1;
+    }
+    60%{
+        transform:translate(-50%,-20px) scale(1.5);
+    }
+    100%{
+        opacity:0;
+        transform:translate(-50%,-250px) scale(2.5);
+    }
+}
+
+/* карточка */
+.card{
+    width:90%;
+    max-width:650px;
+    padding:40px;
+    border-radius:25px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    box-shadow:0 0 40px rgba(255,255,255,.08);
+    text-align:center;
+    opacity:0;
+    transform:translateY(30px);
+    animation:showCard 2s forwards;
+    animation-delay:8s;
+    position:relative;
+    z-index:2;
+}
+
+@keyframes showCard{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h1{
+    font-size:38px;
+    margin-bottom:25px;
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{ text-shadow:0 0 10px rgba(255,255,255,.2);}
+    to{ text-shadow:0 0 25px rgba(255,255,255,.7);}
+}
+
+.text{
+    font-size:20px;
+    line-height:1.8;
+}
+
+.highlight{
+    color:#fda4af;
+}
+
+.secret{
+    margin-top:25px;
+    font-size:15px;
+    opacity:.6;
+    letter-spacing:2px;
+}
+
+/* сердечки */
+.heart{
+    position:absolute;
+    color:#fb7185;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh) scale(.5);
+        opacity:0;
+    }
+    20%{opacity:1;}
+    to{
+        transform:translateY(-120px) scale(1.4);
+        opacity:0;
+    }
+}
+
+/* 📱 Телефонная версия */
+@media (max-width: 768px){
+
+    .card{
+        width:92%;
+        padding:25px;
+        border-radius:20px;
+    }
+
+    h1{
+        font-size:28px;
+        margin-bottom:18px;
+    }
+
+    .text{
+        font-size:16px;
+        line-height:1.6;
+    }
+
+    .secret{
+        font-size:12px;
+        margin-top:18px;
+        letter-spacing:1px;
+    }
+
+    .komplet{
+        font-size:28px;
+    }
+
+}
+
+/* 📱 Очень маленькие телефоны */
+@media (max-width: 480px){
+
+    .card{
+        padding:20px;
+    }
+
+    h1{
+        font-size:22px;
+    }
+
+    .text{
+        font-size:14px;
+        line-height:1.5;
+    }
+
+    .komplet{
+        font-size:22px;
+    }
+
+    .secret{
+        font-size:11px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="kompliments">
+    <h2 class="komplet">твои глаза ✨</h2>
+    <h2 class="komplet">твои волосы 🔥</h2>
+    <h2 class="komplet">твоя улыбка 🤩</h2>
+</div>
+
+<div class="card">
+    <h1>Для одной загадочной девушки</h1>
+
+    <div class="text">
+        Я видел много девушек,<br>
+        но интерес появился только к
+        <span class="highlight">тебе</span>.<br><br>
+
+        Видел много улыбок,<br>
+        но запомнилась именно
+        <span class="highlight">твоя</span>.<br><br>
+
+        И знаешь... твои длинные волосы тебе очень идут.<br><br>
+        Есть люди, которым это просто «нормально», <br> 
+        а у тебя это будто часть твоего характера. <br> 
+        Может, ты и не знаешь кто я.<br>
+        Но возможно уже замечала чей-то взгляд рядом.
+    </div>
+
+    <div class="secret">
+        Иногда загадки красивее ответов...
+    </div>
+</div>
+
+<script>
+// звёзды
+const stars = document.querySelector('.stars');
+
+for(let i=0; i < 100; i++){
+    const star = document.createElement('div');
+    star.classList.add('star');
+
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDuration = (Math.random()*3+2)+'s';
+
+    stars.appendChild(star);
+}
+
+setInterval( () => {
+    const heart = document.createElement('div');
+
+    heart.classList.add('heart');
+    heart.innerHTML='❤';
+
+    heart.style.left = Math.random()*100+'vw';
+    heart.style.fontSize = (Math.random()*20+15)+'px';
+
+    document.body.appendChild(heart);
+
+    setTimeout( () => heart.remove(), 6000);
+},700);
+</script>
+
+</body>
+</html>
